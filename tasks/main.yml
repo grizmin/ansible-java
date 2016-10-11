@@ -153,6 +153,13 @@
   vars:
     namespace: java
 
+# java version link in /opt/java/java
+- name: Create /opt/java/java link
+  tags: java
+  file:
+    state: link
+    src: "{{ java_home }}"
+    dest: "/opt/java/java"
 
 # Configure Java installation as system wide default Java
 - name: Install Java default implementation
