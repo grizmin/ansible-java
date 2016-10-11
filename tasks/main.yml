@@ -153,6 +153,13 @@
   vars:
     namespace: java
 
+# Setup a custom fact to allow roles depending on Java to configure JAVA_HOME variable
+- name: Set JAVA_HOME ansible fact
+  tags: java
+  set_fact:
+    java_home: "{{ java_install_dir }}/oracle/{{ java_oracle_version_str_pkg }}"
+
+
 # java version link in /opt/java/java
 - name: Create /opt/java/java link
   tags: java
