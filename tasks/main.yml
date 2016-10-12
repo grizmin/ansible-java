@@ -87,13 +87,15 @@
     mode: 0755
     dest: "{{ java_install_dir }}/oracle"
 
+- name: include copy
+  include: "{{ java_path_to_lib_role }}/silpion.lib/tasks/copy.yml"
+
 # Install the Oracle redistributable package to the node
 - name: Copy Java redistributable packages
-  tags: java
   when: not ansible_check_mode
   with_items:
     - "{{ java_oracle_redis_filename }}"
-    - "{{ java_oracle_redis_jce_filename }}"
+    - "{{ java_oracle_redis_jce_filename|default('jce_policy-8.zip') }}"
   include: "{{ java_path_to_lib_role }}/silpion.lib/tasks/copy.yml"
   vars:
     filename: "{{ item }}"
